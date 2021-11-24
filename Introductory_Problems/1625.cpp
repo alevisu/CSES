@@ -18,6 +18,7 @@ int move(int pIndex, int pos) {
 }
 
 int main() {
+	std::cin.tie(0);
 	std::cin>>path;
 	for (int i=0;i<81;i++)if(i<=9||i>=72||i%9==0||i%9==8)grid[i]=1;
 	std::cout<<move(0, 10)<<std::endl;
