@@ -1,12 +1,5 @@
-
-from time import time
-start = time()
-import sys
-try:import dotenv;sys.stdin=open('in.txt','r')
-except:pass
-def log(*a):print(*a,file=sys.stderr)
-MIIS=lambda:map(int,input().split())
-
-
-
-log(f'Finished in {time()-start:.3f}sec')
+I=input;n=int(I());v=[-1]*(n+1);s=l=0
+x=[int(x) for x in I().split()]
+for i in range(n):v[x[i]]=i
+for i in v:s+=i<l;l=i
+print(s)
