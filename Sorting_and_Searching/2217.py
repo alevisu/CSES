@@ -1,30 +1,42 @@
+def solve():
+	n,m=MIIS(I())
+	x=[int(x) for x in I().split()]
+	swaps=[MIIS(l) for l in sys.stdin.readlines()]
 
-from time import time
-start = time()
+	p,s=[-1]*(n+1)+[1<<24],1
+	for i in range(n): p[x[i]]=i
+	for i in range(1,len(p)): s+=p[i]<p[i-1] 
+
+	for a,b in swaps:
+		a,b=a-1,b-1
+		pois=set([x[a],x[a]+1,x[b],x[b]+1])
+		for i in pois: s-=p[i]<p[i-1]
+		p[x[a]],p[x[b]]=p[x[b]],p[x[a]]
+		x[a],x[b]=x[b],x[a]
+		for i in pois: s+=p[i]<p[i-1]
+		print(s)
+
+
+
+
+# source of cringe, don't watch below this line!
 import sys
-try:import dotenv;sys.stdin=open('in.txt','r')
-except:pass
-def log(*a):print(*a,file=sys.stderr)
-MIIS=lambda:map(int,input().split())
 
-I=input;n,m=map(int,I().split());v=[-1]*(n+1)+[1<<24];s=l=0
-x=[int(x) for x in I().split()]
-swaps=[(a,b) for a,b in (map(int,l.split()) for l in sys.stdin.readlines())]
-for i in range(n):v[x[i]]=i
-for i in v:s+=i<l;l=i
+LOCAL = False
+try: 
+	sys.stdin=open('in.txt','r')
+	# sys.stdout=open('out.txt', 'w')
+	LOCAL = True
+	def log(*a): print(*a,file=sys.stderr)
+	from time import time
+	start = time()
+except FileNotFoundError:	
+	pass
 
-print(x,s)
-print(v)
-for q,w in swaps[:5]:
-	for i in [q,q+1,w,w+1]:
-		# print(f"({v[i]}, {v[i-1]})")
-		s-=v[i]<v[i-1]
-	v[x[q-1]],v[x[w-1]]=v[x[w-1]],v[x[q-1]]
-	for i in [q,q+1,w,w+1]:s+=v[i]<v[i-1]
-	print(q,w,s)
+I=input
+MIIS=lambda x:map(int,x.split())
 
-log(f'Finished in {time()-start:.3f}sec')
+solve()
 
-"""
-9 10 10 8 8
-"""
+if LOCAL:
+	log(f'Finished in {time()-start:.3f}sec')
