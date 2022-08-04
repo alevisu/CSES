@@ -15,29 +15,8 @@ def solve(ranges):
 	
 	print(' '.join(result))
 
-
-# source of cringe, don't watch below this line!
-import sys
-
-LOCAL = False
-
-
-try: 
-	sys.stdin=open('in.txt','r')
-	# sys.stdout=open('out.txt', 'w')
-	sys.stdout=open('/dev/null', 'w')
-	LOCAL = True
-	def log(*a,**kwa): print(*a,**kwa,file=sys.stderr)
-	from time import time
-	start = time()
-except FileNotFoundError:	
-	pass
-
 I=input
 MIIS=lambda:[*map(int,I().split())]
 
 N = int(I())
 solve([(id, *MIIS()) for id in range(N)])
-
-if LOCAL:
-	log(f'Finished in {time()-start:.3f}sec')
