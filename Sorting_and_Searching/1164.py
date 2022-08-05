@@ -38,7 +38,7 @@ except FileNotFoundError:
 	pass
 
 I=input
-MIIS=lambda:[*map(int,I().split())]
+MIIS=lambda:map(int,I().split())
 
 N = int(I())
 solve([(*MIIS(), id) for id in range(N)])
