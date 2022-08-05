@@ -16,32 +16,8 @@ def solve(customers):
 	print(len(rooms))
 	print(' '.join(result))
 		
-
-
-
-
-# source of cringe, don't watch below this line!
 import sys
 
-LOCAL = False
+N = int(input())
+solve([(int(a),int(b),int(id)) for id, (a, b) in zip(range(N),(l.split() for l in sys.stdin.readlines()))])
 
-
-try: 
-	sys.stdin=open('din.txt','r')
-	# sys.stdout=open('out.txt', 'w')
-	# sys.stdout=open('/dev/null', 'w')
-	LOCAL = True
-	def log(*a,**kwa): print(*a,**kwa,file=sys.stderr)
-	from time import time
-	start = time()
-except FileNotFoundError:	
-	pass
-
-I=input
-MIIS=lambda:map(int,I().split())
-
-N = int(I())
-solve([(*MIIS(), id) for id in range(N)])
-
-if LOCAL:
-	log(f'Finished in {time()-start:.3f}sec')
