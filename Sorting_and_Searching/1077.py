@@ -9,6 +9,7 @@ class BST:
 	def __init__(self, data=[]): 
 		self.root = None
 		self.size = len(data)
+		self.sum = sum([x for x,_ in data])
 		for d in data: self.root = self._add(self.root, d)
 
 	def __len__(self): return self.size
@@ -44,6 +45,7 @@ class BST:
 		if self.root is None: return None
 		self.root = self._remove(self.root, data)
 		self.size -= 1
+		self.sum -= data[0]
 		return self
 
 	# TODO: Write it!
@@ -77,6 +79,7 @@ class BST:
 	def add(self, data):
 		self.root = self._add(self.root, data)
 		self.size += 1
+		self.sum += data[0]
 		return self
 
 	def _add(self, node, data):
@@ -144,7 +147,8 @@ def solve(k, array):
 	
 	# print(array)
 
-	ans = [str(f.max[0])]
+	median = f.max[0]
+	ans = [str(f.size*median-f.sum + l.sum-l.size*median)]
 	for i, (rem, add) in enumerate(zip(array[:len(array)-k], array[k:]),k):
 		# print(f"- Processing {i}: {rem, add}")
 		
@@ -168,7 +172,8 @@ def solve(k, array):
 			f.remove(fmax)
 			l.add(fmax)
 		
-		ans.append(str(f.max[0]))
+		median = f.max[0]
+		ans.append(str(f.size*median-f.sum + l.sum-l.size*median))
 
 	
 	print(' '.join(ans))
@@ -185,7 +190,7 @@ LOCAL = False
 
 log = lambda*a,**kwa:None
 try: 
-	sys.stdin=open('in.txt','r')
+	sys.stdin=open('ein.txt','r')
 	# sys.stdout=open('out.txt', 'w')
 	# sys.stdout=open('/dev/null', 'w')
 	LOCAL = True
