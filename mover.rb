@@ -18,9 +18,9 @@ new_name = File.open(original_name) { |file|
 }
 
 write = 'Y'
-if File.exists? new_name then
-	write = prompt("\n\n\n=>   Overwrite? #{new_name} (y/N)".red).upcase
-end
+# if File.exists? new_name then
+# 	write = prompt("\n\n\n=>   Overwrite? #{new_name} (y/N)".red).upcase
+# end
 
 if write == 'Y' then
 	puts "\n\nMoving solution to \"CSES/#{new_name}\"\n\n".green
