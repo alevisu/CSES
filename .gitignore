@@ -13,3 +13,4 @@ venv
 *template*
 /.cph
 rustpg
+*.ans
