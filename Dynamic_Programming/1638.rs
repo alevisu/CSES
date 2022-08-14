@@ -13,7 +13,7 @@ fn read_ints(quantity: usize) -> Vec<usize> {
 	res
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Copy)]
 enum Cell {
 	Square(usize),
 	Trap
@@ -58,9 +58,10 @@ fn main() {
 	for y in 1..=n {
 		for x in 1..=n {
 			if let Cell::Trap = grid[y][x] {continue;}
+			if let (Cell::Trap, Cell::Trap) = (grid[y-1][x], grid[y][x-1]) {continue;}
 			let top = if let Cell::Square(top) = grid[y-1][x] { top } else { 0 };
 			let left = if let Cell::Square(left) = grid[y][x-1] { left } else { 0 };
-			if top+left != 0 {grid[y][x] = Cell::Square((top + left) % MOD);}
+			grid[y][x] = Cell::Square((top + left) % MOD)
 		}
 	}
 		
