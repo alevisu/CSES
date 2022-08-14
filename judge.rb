@@ -7,12 +7,15 @@ class String
 end
 
 solution = "rustpg/target/release/rustpg"
+solution_source = "rustpg/src/main.rs"
 tests_dir = "tests/"
 
 problem = ARGV[0]
 if !problem
-	puts '', " No problem number provided, aborting ".cyanb, ''
-	exit 1
+	problem = File.open(solution_source) { |file| 
+		/\/(\d+).rs/.match(file.readline)[1]
+	}
+	puts " * [INFO] No explicit problem provided, assuming current: #{problem}"
 end
 
 tests = Dir[tests_dir + problem + "-*.txt"]
@@ -33,13 +36,13 @@ tests.each_with_index { |test, index|
 		puts "\e[1A\e[KTesting #{problem}-#{testn} (#{index+1} of #{tests.size}): passed".green
 	else
 		puts "\n\n ====> Problem #{problem}: test case ##{testn}: fail".cyanb
-		puts ' * Input: ', test[0..500], ''
-		puts ' * Expected:'.green, answer[0..500], ''
-		puts ' * Got:'.red, result[0..500]
+		puts ' *** Input: ', File.read(test)[0..500], ''
+		puts ' *** Expected:'.green, answer[0..500], ''
+		puts ' *** Got:'.red, result[0..500]
 	end
 }
 
-summary = "\n\n ====> Finished: #{nPassed} of #{tests.size} passed"
+summary = "\n ====> Finished: #{nPassed} of #{tests.size} passed"
 if nPassed != tests.size 
 	summary = summary.red
 	puts summary
