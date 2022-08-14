@@ -13,9 +13,11 @@ Two scripts to make life a bit easier.
 Not crossplatform, works on Linux.
 
 	ruby ./mover.rb
-It happened to be more convinient for me to have a single cargo in `./rustpg/` folder, while making a solution. This script is used to move and rename main.rs to solutions folder based on its first line comment. Look into rust solution files for example. **You don't have to run it manually. Judge moving solutions, that passed tests automatically.**
+Used internally to move solutions to proper directory in repo
 
-	ruby ./judge.rb <problem_name>
-Run current build of rust solution, giving it `tests/<problem_name>-*.txt` files as inputs and compare its output to `tests/<problem_name>-*.ans`
+	ruby ./judge.rb [<problem_name>]
+Run current build of rust solution, giving it `tests/<problem_name>-*.txt` files as inputs and compare its output to expected output, contained in same files, after separator "`\n---`".
 
 In case those not equal - outputs first 500 chars of actual/expected outputs.
+
+Judge needs `root` privileges once after reboot to create `tmpfs` with 1M size for capturing stderr
