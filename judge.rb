@@ -63,7 +63,7 @@ tests.each_with_index { |test, index|
 
 summary = "\n ====> Finished: #{nPassed} of #{tests.size} passed"
 if nPassed != tests.size || nPassed == 0
-	puts "#{summary}#{!tests.size ? '' : ': no tests provided'}".red
+	puts "#{summary}#{tests.size != 0 ? '' : ': no tests provided'}".red
 else
 	puts "#{summary}\n * Moving solution".green
 	`./mover.rb`

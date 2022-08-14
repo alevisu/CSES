@@ -3,14 +3,12 @@
 *.pdb
 .vscode
 
-# Added by cargo
-
 /target
+/Cargo*
 
-# Python
 venv
-
 *template*
 /.cph
 rustpg
 *.ans
+/WIP
