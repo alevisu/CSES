@@ -57,7 +57,8 @@ tests.each_with_index { |test, index|
 		puts "\n\n ====> Problem #{problem}: test case ##{testn}: fail".cyanb
 		puts '*** Input: ', input[0..500].strip
 		puts '*** Expected:'.green, expected[0..500].strip
-		puts '*** Got:'.red, err != '' ? "Runtime Error\n#{err}".red : result[0..500].strip
+		puts '*** Got:'.red, result[0..500].strip
+		puts "*** Runtime Error:\n#{err}".red unless err == ''
 	end
 }
 
