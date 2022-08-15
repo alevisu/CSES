@@ -42,6 +42,7 @@ if !problem
 end
 
 tests = Dir[tests_dir + problem + "-*.txt"]
+puts ' * [INFO] Created symlink to first test', `ln -svf #{__dir__}/#{tests[0]} #{tempdir}/test_input.txt`
 
 nPassed = 0
 tests.each_with_index { |test, index|
@@ -53,6 +54,7 @@ tests.each_with_index { |test, index|
 	if expected.strip == result.strip 
 		nPassed += 1
 		puts "\e[1A\e[KTesting #{problem}-#{testn} (#{index+1} of #{tests.size}): passed".green
+		puts ' => Result:'.green, result[0..500].strip
 	else
 		puts "\n\n ====> Problem #{problem}: test case ##{testn}: fail".cyanb
 		puts '*** Input: ', input[0..500].strip
