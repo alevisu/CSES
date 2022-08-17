@@ -22,8 +22,10 @@ fn main() {
 	for _ in 0..=m { for i in 0..n {
 		let mut t = vec![0; 1<<n];
 		for k in 0..1<<n { 
-			t[k] = (t[k] + dp[k^1<<i]) % MOD; 
-			if i>0 && k>>i&1==1 && k>>i-1&1==1 { t[k] = (t[k] + dp[k^1<<i-1]) % MOD; }
+			t[k] = (dp[k^1<<i] + 
+					if i>0 && 1&k>>i==1 && 1&k>>i-1==1 { dp[k^1<<i-1] } 
+					else { 0 }
+				)	% MOD
 		} dp = t;
 	}}
 	println!("{}", dp[0]);
