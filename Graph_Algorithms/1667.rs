@@ -26,7 +26,7 @@ fn main() {
 	route[1] = 0;
 
 	let mut next_comps = VecDeque::new();
-	next_comps.push_back(1);
+	if connections.contains_key(&1) { next_comps.push_back(1); }
 
 	let mut step = 0;
 	while next_comps.len() > 0 {
@@ -49,6 +49,7 @@ fn main() {
 
 	let mut valid_route = vec![n];
 	let mut comp = n;
+	step = route[n];
 	while step > 0 {
 		step -= 1;
 		for &conn in &connections[&comp] {
